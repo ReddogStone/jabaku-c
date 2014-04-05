@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Test">
+      <UniqueIdentifier>{ad41bbe2-30f6-42b0-b163-de61c251e14e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WinApp">
+      <UniqueIdentifier>{a7d91f97-5cae-46f8-9821-34a87706284a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Memory">
+      <UniqueIdentifier>{30da5790-d0df-41c3-876c-9d1aca76c8e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{536b232e-9fec-45df-8fba-2693285b00b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility">
+      <UniqueIdentifier>{0d9557a0-6b51-4e40-aec0-806f5cf935dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Containers">
+      <UniqueIdentifier>{53d397a9-487d-49f9-8713-99e26321a14f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{71b590da-d3e5-4f8e-9bac-1eed3cf2ea63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Default">
+      <UniqueIdentifier>{d621d4a6-5975-4c6e-b05d-128e2b7f01bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Streaming">
+      <UniqueIdentifier>{3953c049-6333-43d7-845f-086301d9236e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{59a2361d-7bc8-46d8-9eef-51ec21df88f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{0452bafb-fa8c-4b09-b53a-198360442fed}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.c">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="winapp.c">
+      <Filter>WinApp</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Default\matrix_def.c">
+      <Filter>Math\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Default\scalar_def.c">
+      <Filter>Math\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Default\vector_def.c">
+      <Filter>Math\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="Memory\heap.c">
+      <Filter>Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Memory\linearallocator.c">
+      <Filter>Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Memory\memory.c">
+      <Filter>Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\renderapid3d9.c">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\renderapiogl.c">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility\assertion.c">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Memory\pools.c">
+      <Filter>Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Streaming\filestream.c">
+      <Filter>Streaming</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\nameregistry.c">
+      <Filter>Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\texture.c">
+      <Filter>Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\geometry.c">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="math\rectangle.c">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\spritebatch.c">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="streaming\stream.c">
+      <Filter>Streaming</Filter>
+    </ClCompile>
+    <ClCompile Include="utility\fpscounter.c">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\LIST\ListMachine\testerror.c">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\LIST\ListMachine\testmacros.c">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="input\mouseDirectInput.c">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\renderapid3d11.c">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="winapp.h">
+      <Filter>WinApp</Filter>
+    </ClInclude>
+    <ClInclude Include="enginesettings.h" />
+    <ClInclude Include="jabaku.h" />
+    <ClInclude Include="Math\matrix.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\scalar.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\vector.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Default\matrix_tpl_def.h">
+      <Filter>Math\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Default\scalar_tpl_def.h">
+      <Filter>Math\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Default\vector_tpl_def.h">
+      <Filter>Math\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory\allocmacros.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory\heap.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory\linearallocator.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory\memory.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory\memorydefs.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\renderapi.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\vertexdatatypes.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility\assertion.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory\pools.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Streaming\filestream.h">
+      <Filter>Streaming</Filter>
+    </ClInclude>
+    <ClInclude Include="Streaming\stream.h">
+      <Filter>Streaming</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\nameregistry.h">
+      <Filter>Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\texture.h">
+      <Filter>Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\nativetexture.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\geometry.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="math\rectangle.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\spritebatch.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\fpscounter.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\LIST\ListMachine\testerror.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\LIST\ListMachine\testmacros.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="input\mouse.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\dxutils.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
