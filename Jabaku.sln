@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C++ Express 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Jabaku", "Jabaku\Jabaku.vcxproj", "{0E2C4F8A-FDFA-4D67-94EF-15367F170705}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Isometric", "Isometric\Isometric.vcxproj", "{8B5486CC-94A0-4789-AE44-21CBA5051BCE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug - OpenGL|Win32 = Debug - OpenGL|Win32
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0E2C4F8A-FDFA-4D67-94EF-15367F170705}.Debug - OpenGL|Win32.ActiveCfg = Release|Win32
+		{0E2C4F8A-FDFA-4D67-94EF-15367F170705}.Debug - OpenGL|Win32.Build.0 = Release|Win32
+		{0E2C4F8A-FDFA-4D67-94EF-15367F170705}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0E2C4F8A-FDFA-4D67-94EF-15367F170705}.Debug|Win32.Build.0 = Debug|Win32
+		{0E2C4F8A-FDFA-4D67-94EF-15367F170705}.Release|Win32.ActiveCfg = Release|Win32
+		{0E2C4F8A-FDFA-4D67-94EF-15367F170705}.Release|Win32.Build.0 = Release|Win32
+		{8B5486CC-94A0-4789-AE44-21CBA5051BCE}.Debug - OpenGL|Win32.ActiveCfg = Debug|Win32
+		{8B5486CC-94A0-4789-AE44-21CBA5051BCE}.Debug - OpenGL|Win32.Build.0 = Debug|Win32
+		{8B5486CC-94A0-4789-AE44-21CBA5051BCE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8B5486CC-94A0-4789-AE44-21CBA5051BCE}.Debug|Win32.Build.0 = Debug|Win32
+		{8B5486CC-94A0-4789-AE44-21CBA5051BCE}.Release|Win32.ActiveCfg = Release|Win32
+		{8B5486CC-94A0-4789-AE44-21CBA5051BCE}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
