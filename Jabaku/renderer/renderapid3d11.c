@@ -14,10 +14,10 @@
 
 #include "d3dutils.h"
 
-IDXGISwapChain* g_swapchain;
-ID3D11Device* g_device;
-ID3D11DeviceContext* g_devcon;
-ID3D11RenderTargetView *g_backbuffer;
+static IDXGISwapChain* g_swapchain;
+static ID3D11Device* g_device;
+static ID3D11DeviceContext* g_devcon;
+static ID3D11RenderTargetView *g_backbuffer;
 
 struct JBKVertexBuffer {
 	ID3D11Buffer* m_buffer;
@@ -32,13 +32,13 @@ struct JBKPixelShader {
 	ID3D11PixelShader* m_shader;
 };
 
-JBKVertexBuffer g_vertexBuffers[1024];
-uint32_t g_vertexBufferCount = 0;
+static JBKVertexBuffer g_vertexBuffers[1024];
+static uint32_t g_vertexBufferCount = 0;
 
-JBKVertexShader g_vertexShaders[128];
-uint32_t g_vertexShaderCount = 0;
-JBKPixelShader g_pixelShaders[128];
-uint32_t g_pixelShaderCount = 0;
+static JBKVertexShader g_vertexShaders[128];
+static uint32_t g_vertexShaderCount = 0;
+static JBKPixelShader g_pixelShaders[128];
+static uint32_t g_pixelShaderCount = 0;
 
 #define D3D_Release(x) (x)->lpVtbl->Release(x)
 
@@ -66,8 +66,8 @@ JBKRenderResult JBKRender_Init(void* hWindow, JBKRenderOptions *options) {
 	ZeroMemory(&viewport, sizeof(viewport));
 	viewport.TopLeftX = 0;
 	viewport.TopLeftY = 0;
-	viewport.Width = 640;
-	viewport.Height = 480;
+	viewport.Width = 800;
+	viewport.Height = 600;
 
 	g_devcon->lpVtbl->RSSetViewports(g_devcon, 1, &viewport);
 
@@ -150,10 +150,10 @@ JBKRenderResult JBKRender_Clear(JBKRenderColor value, float depthVal, int32_t st
 }
 JBKRenderResult JBKRender_ClearRT(JBKRenderColor color) {
 	float floatColor[4] = { 
-		(float)((color >> 24) & 0xFF),
-		(float)((color >> 16) & 0xFF),
-		(float)((color >> 8) & 0xFF),
-		(float)(color & 0xFF)
+		(float)((color >> 24) & 0xFF) / 255.0f,
+		(float)((color >> 16) & 0xFF) / 255.0f,
+		(float)((color >> 8) & 0xFF) / 255.0f,
+		(float)(color & 0xFF) / 255.0f
 	};
 	g_devcon->lpVtbl->ClearRenderTargetView(g_devcon, g_backbuffer, floatColor);
 	return JBK_RENDER_OK;

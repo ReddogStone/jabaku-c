@@ -128,7 +128,9 @@
     <ClCompile Include="test\test_suite.c" />
     <ClCompile Include="Utility\assertion.c" />
     <ClCompile Include="utility\fpscounter.c" />
-    <ClCompile Include="winapp.c" />
+    <ClCompile Include="winapp.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Assets\nameregistry.h">
