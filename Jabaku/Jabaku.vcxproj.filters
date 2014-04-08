@@ -34,6 +34,9 @@
     <Filter Include="Input">
       <UniqueIdentifier>{0452bafb-fa8c-4b09-b53a-198360442fed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Test\shaders">
+      <UniqueIdentifier>{95dae1bf-7615-4750-ba0f-41d7d38b8060}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
@@ -96,16 +99,28 @@
     <ClCompile Include="utility\fpscounter.c">
       <Filter>Utility</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\LIST\ListMachine\testerror.c">
-      <Filter>Test</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\LIST\ListMachine\testmacros.c">
-      <Filter>Test</Filter>
-    </ClCompile>
     <ClCompile Include="input\mouseDirectInput.c">
       <Filter>Input</Filter>
     </ClCompile>
     <ClCompile Include="renderer\renderapid3d11.c">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="test\testerror.c">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="test\testmacros.c">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="test\test_suite.c">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="containers\array_pool_test.c">
+      <Filter>Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="containers\array_pool.c">
+      <Filter>Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\d3dutils.c">
       <Filter>Renderer</Filter>
     </ClCompile>
   </ItemGroup>
@@ -151,9 +166,6 @@
     <ClInclude Include="Renderer\renderapi.h">
       <Filter>Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer\vertexdatatypes.h">
-      <Filter>Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="Utility\assertion.h">
       <Filter>Utility</Filter>
     </ClInclude>
@@ -187,17 +199,43 @@
     <ClInclude Include="utility\fpscounter.h">
       <Filter>Utility</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\LIST\ListMachine\testerror.h">
-      <Filter>Test</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\LIST\ListMachine\testmacros.h">
-      <Filter>Test</Filter>
-    </ClInclude>
     <ClInclude Include="input\mouse.h">
       <Filter>Input</Filter>
     </ClInclude>
     <ClInclude Include="utility\dxutils.h">
       <Filter>Utility</Filter>
     </ClInclude>
+    <ClInclude Include="renderer\shader_input.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="test\testerror.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="test\testmacros.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="test\test_suite.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="containers\array_pool.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="containers\array_pool_test.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\d3dutils.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\primitive_type.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="test\shaders\simple_vs.hlsl">
+      <Filter>Test\shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="test\shaders\simple_ps.hlsl">
+      <Filter>Test\shaders</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

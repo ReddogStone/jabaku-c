@@ -64,6 +64,7 @@
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
+      <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -86,14 +87,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\LIST\ListMachine\testerror.c" />
-    <ClCompile Include="..\..\LIST\ListMachine\testmacros.c" />
     <ClCompile Include="Assets\nameregistry.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Assets\texture.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="containers\array_pool.c" />
+    <ClCompile Include="containers\array_pool_test.c" />
     <ClCompile Include="input\mouseDirectInput.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -106,6 +107,7 @@
     <ClCompile Include="Memory\linearallocator.c" />
     <ClCompile Include="Memory\memory.c" />
     <ClCompile Include="Memory\pools.c" />
+    <ClCompile Include="renderer\d3dutils.c" />
     <ClCompile Include="Renderer\geometry.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -121,19 +123,22 @@
     </ClCompile>
     <ClCompile Include="Streaming\filestream.c" />
     <ClCompile Include="streaming\stream.c" />
+    <ClCompile Include="test\testerror.c" />
+    <ClCompile Include="test\testmacros.c" />
+    <ClCompile Include="test\test_suite.c" />
     <ClCompile Include="Utility\assertion.c" />
     <ClCompile Include="utility\fpscounter.c" />
     <ClCompile Include="winapp.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\LIST\ListMachine\testerror.h" />
-    <ClInclude Include="..\..\LIST\ListMachine\testmacros.h" />
     <ClInclude Include="Assets\nameregistry.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Assets\texture.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="containers\array_pool.h" />
+    <ClInclude Include="containers\array_pool_test.h" />
     <ClInclude Include="input\mouse.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
@@ -152,27 +157,38 @@
     <ClInclude Include="enginesettings.h" />
     <ClInclude Include="jabaku.h" />
     <ClInclude Include="Memory\pools.h" />
+    <ClInclude Include="renderer\d3dutils.h" />
     <ClInclude Include="Renderer\geometry.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Renderer\nativetexture.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="renderer\primitive_type.h" />
     <ClInclude Include="Renderer\renderapi.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="renderer\shader_input.h" />
     <ClInclude Include="renderer\spritebatch.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Renderer\vertexdatatypes.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Streaming\filestream.h" />
     <ClInclude Include="Streaming\stream.h" />
+    <ClInclude Include="test\testerror.h" />
+    <ClInclude Include="test\testmacros.h" />
+    <ClInclude Include="test\test_suite.h" />
     <ClInclude Include="Utility\assertion.h" />
     <ClInclude Include="utility\dxutils.h" />
     <ClInclude Include="utility\fpscounter.h" />
     <ClInclude Include="winapp.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="test\shaders\simple_ps.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="test\shaders\simple_vs.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

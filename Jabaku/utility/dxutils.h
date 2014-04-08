@@ -5,9 +5,9 @@
 
 #include "utility/assertion.h"
 
-#define DXCall(exp) do{ ASSERT((exp) == S_OK, "D3D Error while executing \"" \
+#define DXCall(exp) do{ int __error = (exp); ASSERT(__error == S_OK, "D3D Error while executing \"" \
 	#exp \
-	"\"!\n") } while(0);
+	"\": %x\n", __error) } while(0);
 
 __inline void SafeRelease(void** p) {
 	if (*p) {
