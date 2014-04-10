@@ -23,6 +23,10 @@ struct JBKVertexBuffer {
 	ID3D11Buffer* m_buffer;
 };
 
+struct JBKConstantBuffer {
+	ID3D11Buffer* m_buffer;
+};
+
 struct JBKVertexShader {
 	ID3D11VertexShader* m_shader;
 	ID3D11InputLayout* m_inputLayout;
@@ -34,6 +38,8 @@ struct JBKPixelShader {
 
 static JBKVertexBuffer g_vertexBuffers[1024];
 static uint32_t g_vertexBufferCount = 0;
+static JBKConstantBuffer g_constantBuffers[1024];
+static uint32_t g_constantBufferCount = 0;
 
 static JBKVertexShader g_vertexShaders[128];
 static uint32_t g_vertexShaderCount = 0;
@@ -105,6 +111,30 @@ JBKVertexBuffer* JBKRender_CreateVertexBuffer(const void* data, uint32_t sizeInB
 }
 void JBKRender_DestroyVertexBuffer(JBKVertexBuffer *buffer) {
 	D3D_Release(buffer->m_buffer);
+}
+
+JBKConstantBuffer* JBKRender_CreateConstantBuffer(uint32_t sizeInBytes) {
+	D3D11_BUFFER_DESC desc = { 0 };
+	desc.ByteWidth = sizeInBytes;
+	desc.Usage = D3D11_USAGE_DYNAMIC;
+	desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+
+	JBKConstantBuffer *cb = &g_constantBuffers[g_constantBufferCount++];
+	DXCall(g_device->lpVtbl->CreateBuffer(g_device, &desc, NULL, &cb->m_buffer));
+	return cb;
+}
+void JBKRender_DestroyConstantBuffer(JBKConstantBuffer *buffer) {
+	D3D_Release(buffer->m_buffer);
+}
+
+void* JBKRender_LockConstantBuffer(JBKConstantBuffer *buffer) {
+	D3D11_MAPPED_SUBRESOURCE mapped;
+	DXCall(g_devcon->lpVtbl->Map(g_devcon, (ID3D11Resource*)buffer->m_buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped));
+	return mapped.pData;
+}
+void JBKRender_UnlockConstantBuffer(JBKConstantBuffer *buffer) {
+	g_devcon->lpVtbl->Unmap(g_devcon, (ID3D11Resource*)buffer->m_buffer, 0);
 }
 
 static void convertInputElements(D3D11_INPUT_ELEMENT_DESC* out, JBKShaderInputElement* elements, uint32_t elementCount) {
@@ -210,6 +240,23 @@ JBKRenderResult JBKRender_SetVertexBuffer(JBKVertexBuffer* vertexBuffer, uint32_
 	}
 
 	g_devcon->lpVtbl->IASetVertexBuffers(g_devcon, 0, elementCount, buffers, strideArray, offsetArray);
+	return JBK_RENDER_OK;
+}
+
+JBKRenderResult JBKRender_SetVSConstants(JBKConstantBuffer** constantBuffers, uint32_t bufferCount) {
+	ID3D11Buffer* buffers[16];
+	for (uint32_t i = 0; (i < bufferCount) && (i < 16); i++) {
+		buffers[i] = constantBuffers[i]->m_buffer;
+	}
+	g_devcon->lpVtbl->VSSetConstantBuffers(g_devcon, 0, bufferCount, buffers);
+	return JBK_RENDER_OK;
+}
+JBKRenderResult JBKRender_SetPSConstants(JBKConstantBuffer** constantBuffers, uint32_t bufferCount) {
+	ID3D11Buffer* buffers[16];
+	for (uint32_t i = 0; (i < bufferCount) && (i < 16); i++) {
+		buffers[i] = constantBuffers[i]->m_buffer;
+	}
+	g_devcon->lpVtbl->PSSetConstantBuffers(g_devcon, 0, bufferCount, buffers);
 	return JBK_RENDER_OK;
 }
 

@@ -53,6 +53,12 @@ int main(int argc, char* argv[]) {
 	};
 	JBKVertexBuffer* vb = JBKRender_CreateVertexBuffer(bufferData, sizeof(bufferData));
 
+	float color[] = {0.1f, 0.2f, 0.3f, 1.0f};
+	JBKConstantBuffer* cb = JBKRender_CreateConstantBuffer(sizeof(color));
+	void* mem = JBKRender_LockConstantBuffer(cb);
+	SDL_memcpy(mem, color, sizeof(color));
+	JBKRender_UnlockConstantBuffer(cb);
+
 	while (JBKWinApp_GetRunning(&app)) {
 		JBKWinApp_Update(&app);
 
@@ -61,6 +67,7 @@ int main(int argc, char* argv[]) {
 		JBKRender_SetEffect(vs, ps);
 
 		uint32_t offsets[] = { 0, 12 };
+		JBKRender_SetPSConstants(&cb, 1);
 		JBKRender_SetVertexBuffer(vb, 2, 16, offsets);
 
 		JBKRender_DrawPrimitives(JBK_PRIMITIVE_TRIANGLE_LIST, sizeof(bufferData) / sizeof(bufferData[0]), 0);
@@ -68,9 +75,10 @@ int main(int argc, char* argv[]) {
 		JBKRender_Present();
 	}
 
+	JBKRender_DestroyConstantBuffer(cb);
+	JBKRender_DestroyVertexBuffer(vb);
 	JBKRender_DestroyVertexShader(vs);
 	JBKRender_DestroyPixelShader(ps);
-	JBKRender_DestroyVertexBuffer(vb);
 	JBKRender_Cleanup();
 	JBKWinApp_Destroy(&app);
 	return 0;
