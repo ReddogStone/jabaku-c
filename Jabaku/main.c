@@ -1,6 +1,7 @@
 #define _CRTDBG_MAP_ALLOC
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdlib.h>
+#include <stdio.h>
 #include <crtdbg.h>
 
 #include <stdint.h>
@@ -10,6 +11,7 @@
 
 #include "winapp.h"
 #include "renderer/renderapi.h"
+#include "math/vector.h"
 
 #include "test/test_suite.h"
 
@@ -58,6 +60,10 @@ int main(int argc, char* argv[]) {
 	void* mem = JBKRender_LockConstantBuffer(cb);
 	SDL_memcpy(mem, color, sizeof(color));
 	JBKRender_UnlockConstantBuffer(cb);
+
+	JBKVector4 v1 = JBKVector4_Set(1.0f, 2.0f, 3.0f, 4.0f);
+	JBKVector4 v2 = JBKVector4_Set(2.0f, 3.0f, 4.0f, 5.0f);
+	JBKScalar dot = JBKVector4_Dot(v1, v2);
 
 	while (JBKWinApp_GetRunning(&app)) {
 		JBKWinApp_Update(&app);

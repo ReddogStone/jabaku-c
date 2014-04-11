@@ -9,7 +9,7 @@
 
 #define JBK_WIN32
 
-#define JBK_MATH_DEFAULT
+#define JBK_MATH_XNAMATH
 
 #define JBK_DIRECT_3D_11
 

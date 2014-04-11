@@ -103,6 +103,7 @@
     <ClCompile Include="Math\Default\scalar_def.c" />
     <ClCompile Include="Math\Default\vector_def.c" />
     <ClCompile Include="math\rectangle.c" />
+    <ClCompile Include="math\xnamath\vector.c" />
     <ClCompile Include="Memory\heap.c" />
     <ClCompile Include="Memory\linearallocator.c" />
     <ClCompile Include="Memory\memory.c" />
@@ -151,6 +152,9 @@
     <ClInclude Include="math\rectangle.h" />
     <ClInclude Include="Math\scalar.h" />
     <ClInclude Include="Math\vector.h" />
+    <ClInclude Include="math\xnamath\scalar_tpl.h" />
+    <ClInclude Include="math\xnamath\vector_tpl.h" />
+    <ClInclude Include="math\xnamath\xnamathinclude.h" />
     <ClInclude Include="Memory\allocmacros.h" />
     <ClInclude Include="Memory\heap.h" />
     <ClInclude Include="Memory\linearallocator.h" />

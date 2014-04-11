@@ -37,6 +37,9 @@
     <Filter Include="Test\shaders">
       <UniqueIdentifier>{95dae1bf-7615-4750-ba0f-41d7d38b8060}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math\xnamath">
+      <UniqueIdentifier>{94f92f4c-f347-48f7-b536-b47d92fbf2f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
@@ -122,6 +125,9 @@
     </ClCompile>
     <ClCompile Include="renderer\d3dutils.c">
       <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="math\xnamath\vector.c">
+      <Filter>Math\xnamath</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -228,6 +234,15 @@
     </ClInclude>
     <ClInclude Include="renderer\primitive_type.h">
       <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="math\xnamath\vector_tpl.h">
+      <Filter>Math\xnamath</Filter>
+    </ClInclude>
+    <ClInclude Include="math\xnamath\scalar_tpl.h">
+      <Filter>Math\xnamath</Filter>
+    </ClInclude>
+    <ClInclude Include="math\xnamath\xnamathinclude.h">
+      <Filter>Math\xnamath</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
