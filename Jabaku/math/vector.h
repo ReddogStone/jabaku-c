@@ -1,6 +1,8 @@
 #ifndef JBK_MATH_VECTOR_H
 #define JBK_MATH_VECTOR_H
 
+#include <stdint.h>
+
 #include "math/scalar.h"
 
 #if defined(JBK_MATH_DEFAULT)
@@ -22,6 +24,23 @@ JBKVector4 JBKVector3_Set(float x, float y, float z);
 JBKVector4 JBKVector4_Set(float x, float y, float z, float w);
 
 JBKVector4 JBKVector4_Replicate(float value);
+
+//============================================
+// Vector accessors
+//============================================
+float JBKVector4_GetX(JBKVector4Reg v);
+float JBKVector4_GetY(JBKVector4Reg v);
+float JBKVector4_GetZ(JBKVector4Reg v);
+float JBKVector4_GetW(JBKVector4Reg v);
+JBKVector4 JBKVector4_SetX(JBKVector4Reg v, float value);
+JBKVector4 JBKVector4_SetY(JBKVector4Reg v, float value);
+JBKVector4 JBKVector4_SetZ(JBKVector4Reg v, float value);
+JBKVector4 JBKVector4_SetW(JBKVector4Reg v, float value);
+
+//============================================
+// Vector comparisson
+//============================================
+int8_t JBKVector4_Equal(JBKVector4Reg v1, JBKVector4Reg v2);
 
 //============================================
 // Vector arithmetics

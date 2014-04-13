@@ -1,4 +1,5 @@
 #include "math/vector.h"
+
 #include "xnamathinclude.h"
 
 static JBKVector4 g_vectorOne = {1.0f, 1.0f, 1.0f, 1.0f};
@@ -19,6 +20,51 @@ JBKVector4 JBKVector4_Set(float x, float y, float z, float w) {
 
 JBKVector4 JBKVector4_Replicate(float value) {
 	return _mm_set_ps1(value);
+}
+
+float JBKVector4_GetX(JBKVector4Reg v) {
+	return _mm_cvtss_f32(v);
+}
+float JBKVector4_GetY(JBKVector4Reg v) {
+	JBKVector4 tmp = _mm_shuffle_ps(v, v, _MM_SHUFFLE(1, 1, 1, 1));
+	return JBKVector4_GetX(tmp);
+}
+float JBKVector4_GetZ(JBKVector4Reg v) {
+	JBKVector4 tmp = _mm_shuffle_ps(v, v, _MM_SHUFFLE(2, 2, 2, 2));
+	return JBKVector4_GetX(tmp);
+}
+float JBKVector4_GetW(JBKVector4Reg v) {
+	JBKVector4 tmp = _mm_shuffle_ps(v, v, _MM_SHUFFLE(3, 3, 3, 3));
+	return JBKVector4_GetX(tmp);
+}
+JBKVector4 JBKVector4_SetX(JBKVector4Reg v, float value) {
+	JBKVector4 res = _mm_set_ss(value);
+	res = _mm_move_ss(v, res);
+	return res;
+}
+JBKVector4 JBKVector4_SetY(JBKVector4Reg v, float value) {
+	JBKVector4 res = _mm_shuffle_ps(v, v, _MM_SHUFFLE(3, 2, 0, 1));
+	res = JBKVector4_SetX(res, value);
+	res = _mm_shuffle_ps(res, res, _MM_SHUFFLE(3, 2, 0, 1));
+	return res;
+}
+JBKVector4 JBKVector4_SetZ(JBKVector4Reg v, float value) {
+	JBKVector4 res = _mm_shuffle_ps(v, v, _MM_SHUFFLE(3, 0, 1, 2));
+	res = JBKVector4_SetX(res, value);
+	res = _mm_shuffle_ps(res, res, _MM_SHUFFLE(3, 0, 1, 2));
+	return res;
+}
+JBKVector4 JBKVector4_SetW(JBKVector4Reg v, float value) {
+	JBKVector4 res = _mm_shuffle_ps(v, v, _MM_SHUFFLE(0, 2, 1, 3));
+	res = JBKVector4_SetX(res, value);
+	res = _mm_shuffle_ps(res, res, _MM_SHUFFLE(0, 2, 1, 3));
+	return res;
+}
+
+int8_t JBKVector4_Equal(JBKVector4Reg v1, JBKVector4Reg v2) {
+	JBKVector4 res = _mm_cmpeq_ps(v1, v2);
+	int bits = _mm_movemask_ps(res);
+	return (bits == 0xF);
 }
 
 JBKVector4 JBKVector4_Neg(JBKVector4Reg v) {

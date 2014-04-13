@@ -129,6 +129,18 @@
     <ClCompile Include="math\xnamath\vector.c">
       <Filter>Math\xnamath</Filter>
     </ClCompile>
+    <ClCompile Include="math\vector_test.c">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="math\xnamath\scalar.c">
+      <Filter>Math\xnamath</Filter>
+    </ClCompile>
+    <ClCompile Include="math\xnamath\matrix.c">
+      <Filter>Math\xnamath</Filter>
+    </ClCompile>
+    <ClCompile Include="math\matrix_test.c">
+      <Filter>Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="winapp.h">
@@ -243,6 +255,15 @@
     </ClInclude>
     <ClInclude Include="math\xnamath\xnamathinclude.h">
       <Filter>Math\xnamath</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector_test.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\xnamath\matrix_tpl.h">
+      <Filter>Math\xnamath</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix_test.h">
+      <Filter>Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

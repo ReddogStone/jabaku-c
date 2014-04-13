@@ -102,7 +102,11 @@
     <ClCompile Include="Math\Default\matrix_def.c" />
     <ClCompile Include="Math\Default\scalar_def.c" />
     <ClCompile Include="Math\Default\vector_def.c" />
+    <ClCompile Include="math\matrix_test.c" />
     <ClCompile Include="math\rectangle.c" />
+    <ClCompile Include="math\vector_test.c" />
+    <ClCompile Include="math\xnamath\matrix.c" />
+    <ClCompile Include="math\xnamath\scalar.c" />
     <ClCompile Include="math\xnamath\vector.c" />
     <ClCompile Include="Memory\heap.c" />
     <ClCompile Include="Memory\linearallocator.c" />
@@ -149,9 +153,12 @@
     <ClInclude Include="Math\Default\scalar_tpl_def.h" />
     <ClInclude Include="Math\Default\vector_tpl_def.h" />
     <ClInclude Include="Math\matrix.h" />
+    <ClInclude Include="math\matrix_test.h" />
     <ClInclude Include="math\rectangle.h" />
     <ClInclude Include="Math\scalar.h" />
     <ClInclude Include="Math\vector.h" />
+    <ClInclude Include="math\vector_test.h" />
+    <ClInclude Include="math\xnamath\matrix_tpl.h" />
     <ClInclude Include="math\xnamath\scalar_tpl.h" />
     <ClInclude Include="math\xnamath\vector_tpl.h" />
     <ClInclude Include="math\xnamath\xnamathinclude.h" />

@@ -12,6 +12,10 @@ DECLARE_EQ_NEQ_PRIMITIVE(const void*, Ptr);
 
 int AssertEqualStr(const char* a, const char* b, int line, const char* file, const char* function, const char* exp);
 int AssertNeqStr(const char* a, const char* b, int line, const char* file, const char* function, const char* aexp, const char* bexp);
+int AssertEqualFloat(const float a, const float b, int line, const char* file, const char* function, const char* exp);
+int AssertNeqFloat(const float a, const float b, int line, const char* file, const char* function, const char* aexp, const char* bexp);
+int AssertEqualFloat4(const float a[], const float b[], int line, const char* file, const char* function, const char* exp);
+int AssertNeqFloat4(const float a[], const float b[], int line, const char* file, const char* function, const char* aexp, const char* bexp);
 
 int AssertFailure(int line, const char* file, const char* function);
 
@@ -24,6 +28,10 @@ int AssertFailure(int line, const char* file, const char* function);
 #define ASSERT_NEQ_PTR(a, b) ASSERT_NEQ(Ptr, a, b)
 #define ASSERT_EQUAL_STR(a, b) ASSERT_EQ(Str, a, b)
 #define ASSERT_NEQ_STR(a, b) ASSERT_NEQ(Str, a, b)
+#define ASSERT_EQUAL_FLOAT(a, b) ASSERT_EQ(Float, a, b)
+#define ASSERT_NEQ_FLOAT(a, b) ASSERT_NEQ(Float, a, b)
+#define ASSERT_EQUAL_FLOAT4(a, b) ASSERT_EQ(Float4, a, b)
+#define ASSERT_NEQ_FLOAT4(a, b) ASSERT_NEQ(Float4, a, b)
 
 #define ASSERT_FAILURE() if( !AssertFailure(__LINE__, __FILE__, __FUNCTION__) ) { return; }
 
