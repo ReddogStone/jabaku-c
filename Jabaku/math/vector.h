@@ -62,6 +62,6 @@ JBKScalar JBKVector4_SquareLength(JBKVector4Reg v);
 JBKScalar JBKVector3_Length(JBKVector4Reg v);
 JBKScalar JBKVector4_Length(JBKVector4Reg v);
 JBKVector4 JBKVector3_Normalize(JBKVector4Reg v);
-JBKVector4 JBKVector4_Normaize(JBKVector4Reg v);
+JBKVector4 JBKVector4_Normalize(JBKVector4Reg v);
 
 #endif // JBK_MATH_VECTOR_H

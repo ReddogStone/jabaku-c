@@ -1,8 +1,11 @@
 #include "math/vector.h"
 
-#include "xnamathinclude.h"
-
 static JBKVector4 g_vectorOne = {1.0f, 1.0f, 1.0f, 1.0f};
+
+static JBKVector4 g_INF = { 0x7F800000, 0x7F800000, 0x7F800000, 0x7F800000 };
+static JBKVector4 g_NAN = { 0x7FC00000, 0x7FC00000, 0x7FC00000, 0x7FC00000 };
+
+static JBKVector4I g_maskXYZ = { 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x00000000 };
 
 JBKVector4 JBKVector4_Zero() {
 	return _mm_setzero_ps();
@@ -86,23 +89,59 @@ JBKVector4 JBKVector4_Div(JBKVector4Reg v, JBKScalarReg s) {
 JBKScalar JBKVector4_Dot(JBKVector4Reg v1, JBKVector4Reg v2) {
 	JBKVector4 tmp2 = v2;
 	JBKVector4 tmp = _mm_mul_ps(v1, tmp2);
-	// x -> z, y -> w
 	tmp2 = _mm_shuffle_ps(tmp2, tmp, _MM_SHUFFLE(1, 0, 0, 0));
-	// z = x + z; w = y + w;
 	tmp2 = _mm_add_ps(tmp2, tmp);
-	// w -> z
 	tmp = _mm_shuffle_ps(tmp, tmp2, _MM_SHUFFLE(0, 3, 0, 0));
-	// z = z + w
 	tmp = _mm_add_ps(tmp, tmp2);
 	return _mm_shuffle_ps(tmp, tmp, _MM_SHUFFLE(2, 2, 2, 2));
 }
 
-JBKScalar JBKVector3_Dot(JBKVector4Reg v1, JBKVector4Reg v2);
-JBKVector4 JBKVector3_Cross(JBKVector4Reg v1, JBKVector4Reg v2);
+JBKScalar JBKVector3_Dot(JBKVector4Reg v1, JBKVector4Reg v2) {
+	JBKVector4 res = _mm_mul_ps(v1, v2);
+	JBKVector4 tmp = _mm_shuffle_ps(res, res, _MM_SHUFFLE(2, 1, 2, 1));
+	res = _mm_add_ss(res, tmp);
+	tmp = _mm_shuffle_ps(tmp, tmp, _MM_SHUFFLE(1, 1, 1, 1));
+	res = _mm_add_ss(res, tmp);
+	return _mm_shuffle_ps(res, res, _MM_SHUFFLE(0, 0, 0, 0));
+}
+JBKVector4 JBKVector3_Cross(JBKVector4Reg v1, JBKVector4Reg v2) {
+	JBKVector4 tmp1 = _mm_shuffle_ps(v1, v1, _MM_SHUFFLE(3, 0, 2, 1));
+	JBKVector4 tmp2 = _mm_shuffle_ps(v2, v2, _MM_SHUFFLE(3, 1, 0, 2));
 
-JBKScalar JBKVector3_SquareLength(JBKVector4Reg v);
-JBKScalar JBKVector4_SquareLength(JBKVector4Reg v);
-JBKScalar JBKVector3_Length(JBKVector4Reg v);
+	JBKVector4 res = _mm_mul_ps(tmp1, tmp2);
+	tmp1 = _mm_shuffle_ps(tmp1, tmp1, _MM_SHUFFLE(3, 0, 2, 1));
+	tmp2 = _mm_shuffle_ps(tmp2, tmp2, _MM_SHUFFLE(3, 1, 0, 2));
+	tmp1 = _mm_mul_ps(tmp1, tmp2);
+	res = _mm_sub_ps(res, tmp1);
+	res = _mm_and_ps(res, g_maskXYZ.v);
+	res = JBKVector4_SetW(res, 1.0f);
+	return res;
+}
+
+JBKScalar JBKVector3_SquareLength(JBKVector4Reg v) {
+	return JBKVector3_Dot(v, v);
+}
+JBKScalar JBKVector4_SquareLength(JBKVector4Reg v) {
+	return JBKVector4_Dot(v, v);
+}
+JBKScalar JBKVector3_Length(JBKVector4Reg v) {
+	JBKVector4 lenSquare = JBKVector3_SquareLength(v);
+	return _mm_sqrt_ps(lenSquare);
+}
 JBKScalar JBKVector4_Length(JBKVector4Reg v);
-JBKVector4 JBKVector3_Normalize(JBKVector4Reg v);
-JBKVector4 JBKVector4_Normaize(JBKVector4Reg v);
+JBKVector4 JBKVector3_Normalize(JBKVector4Reg v) {
+	JBKVector4 lenSquare = JBKVector3_SquareLength(v);
+
+	JBKVector4 res = JBKVector3_Length(v);
+	JBKVector4 zeroMask = JBKVector4_Zero();
+	zeroMask = _mm_cmpneq_ps(zeroMask, res);
+	lenSquare = _mm_cmpneq_ps(lenSquare, g_INF);
+	res = _mm_div_ps(v, res);
+	res = _mm_and_ps(res, zeroMask);
+	JBKVector4 tmp1 = _mm_andnot_ps(lenSquare, g_NAN);
+	JBKVector4 tmp2 = _mm_and_ps(res, lenSquare);
+	res = _mm_or_ps(tmp1, tmp2);
+	res = JBKVector4_SetW(res, 1.0f);
+	return res;
+}
+JBKVector4 JBKVector4_Normalize(JBKVector4Reg v);

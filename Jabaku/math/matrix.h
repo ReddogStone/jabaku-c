@@ -45,6 +45,8 @@ JBKMatrix JBKMatrix_Scale(JBKVector4Reg scaleVec3);
 JBKMatrix JBKMatrix_RotationX(float angle);
 JBKMatrix JBKMatrix_RotationY(float angle);
 JBKMatrix JBKMatrix_RotationZ(float angle);
+JBKMatrix JBKMatrix_RotationNormal(JBKVector4 normalizedAxis, float angle);
+JBKMatrix JBKMatrix_Rotation(JBKVector4 axis, float angle);
 JBKMatrix JBKMatrix_Translation(JBKVector4Reg transVec3);
 
 JBKMatrix JBKMatrix_Look(JBKVector4Reg pos, JBKVector4Reg dir, JBKVector4Reg up);
@@ -68,7 +70,7 @@ JBKMatrix JBKMatrix_MulByScalar(JBKMatrixReg m, JBKScalarReg s);
 JBKMatrix JBKMatrix_DivByScalar(JBKMatrixReg m, JBKScalarReg s);
 
 JBKScalar JBKMatrix_Determinant(JBKMatrixReg m);
-JBKMatrix JBKMatrix_Inverse(JBKMatrixReg m);
+JBKMatrix JBKMatrix_Inverse(JBKMatrixReg m, JBKScalar* det);
 JBKMatrix JBKMatrix_Transpose(JBKMatrixReg m);
 
 //============================================
