@@ -13,9 +13,11 @@ static int g_unitTestMode = 0;
 void JBKUtility_Assert(int condition, const char *file, unsigned line, const char * format, ...) {
 	if (!condition) {
 		char buffer[1024];
+		int written = sprintf_s(buffer, 1024, "ASSERTION FAIL: ");
+
 		va_list args;
 		va_start(args, format);
-		vsprintf_s(buffer, 1024, format, args);
+		vsprintf_s(buffer + written, 1024 - written, format, args);
 		va_end(args);
 
 		if (g_unitTestMode) {
@@ -23,8 +25,8 @@ void JBKUtility_Assert(int condition, const char *file, unsigned line, const cha
 		} else {
 			OutputDebugString(buffer);
 			OutputDebugString("\n");
-//			__debugbreak();
-//			exit(0);
+			__debugbreak();
+			exit(0);
 		}
 	}
 }

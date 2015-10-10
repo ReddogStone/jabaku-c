@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
 	test_main();
 	JBKWinApp app;
 	// create the windows app
-	JBKWinApp_Init(&app, 800, 600, "Test App");
+	JBKWinApp_Init(&app, 800, 600, "Test App", JBK_WINAPP_WINDOWED);
 	JBKRender_Init(JBKWinApp_GetHandle(&app), NULL);
 
 	SDL_RWops* file = SDL_RWFromFile("../lib/simple_vs.cso", "rb");
@@ -53,13 +53,16 @@ int main(int argc, char* argv[]) {
 		{ -0.5f,  0.0f, 0.0f, 0xFF0000FF },
 		{  0.5f,  0.0f, 0.0f, 0xFF00FF00 }
 	};
+
 	JBKVertexBuffer* vb = JBKRender_CreateVertexBuffer(bufferData, sizeof(bufferData));
 
 	float color[] = {0.1f, 0.2f, 0.3f, 1.0f};
 	JBKConstantBuffer* cb = JBKRender_CreateConstantBuffer(sizeof(color));
-	void* mem = JBKRender_LockConstantBuffer(cb);
-	SDL_memcpy(mem, color, sizeof(color));
-	JBKRender_UnlockConstantBuffer(cb);
+	{
+		void* mem = JBKRender_LockConstantBuffer(cb);
+		SDL_memcpy(mem, color, sizeof(color));
+		JBKRender_UnlockConstantBuffer(cb);
+	}
 
 	while (JBKWinApp_GetRunning(&app)) {
 		JBKWinApp_Update(&app);
@@ -68,9 +71,10 @@ int main(int argc, char* argv[]) {
 
 		JBKRender_SetEffect(vs, ps);
 
-		uint32_t offsets[] = { 0, 12 };
+		uint32_t offset = 0;
+		uint32_t stride = 16;
 		JBKRender_SetPSConstants(&cb, 1);
-		JBKRender_SetVertexBuffer(vb, 2, 16, offsets);
+		JBKRender_SetVertexBuffers(&vb, 1, &stride, &offset);
 
 		JBKRender_DrawPrimitives(JBK_PRIMITIVE_TRIANGLE_LIST, sizeof(bufferData) / sizeof(bufferData[0]), 0);
 

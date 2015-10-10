@@ -9,8 +9,8 @@
 
 // renderer
 #include "renderer/renderapi.h"
-#include "renderer/nativetexture.h"
-#include "renderer/vertexdatatypes.h"
+#include "renderer/primitive_type.h"
+#include "renderer/shader_input.h"
 #include "renderer/spritebatch.h"
 
 // application

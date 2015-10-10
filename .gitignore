@@ -1,3 +1,8 @@
 lib
+Debug
+Release
 Jabaku/Debug
 Jabaku/Release
+3rdparty/lpng1618
+3rdparty/zlib-1.2.8
+jabaku.sdf

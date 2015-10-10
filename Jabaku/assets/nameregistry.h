@@ -1,0 +1,6 @@
+#ifndef JBK_NAME_REGISTRY_H
+#define JBK_NAME_REGISTRY_H
+
+
+
+#endif // JBK_NAME_REGISTRY_H

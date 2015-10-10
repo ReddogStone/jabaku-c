@@ -2,10 +2,10 @@
 #define JBK_RENDER_API_H
 
 #include <stdint.h>
-#include "renderer/nativetexture.h"
 
 #include "shader_input.h"
 #include "primitive_type.h"
+#include "resource_format.h"
 
 // typedefs
 typedef enum {
@@ -14,7 +14,8 @@ typedef enum {
 } JBKRenderResult;
 
 typedef struct JBKRenderOptions {
-	int dummy;
+	uint32_t sx;
+	uint32_t sy;
 } JBKRenderOptions;
 
 typedef uint32_t JBKRenderColor;
@@ -25,6 +26,8 @@ typedef struct JBKConstantBuffer JBKConstantBuffer;
 
 typedef struct JBKVertexShader JBKVertexShader;
 typedef struct JBKPixelShader JBKPixelShader;
+
+typedef struct JBKNativeTexture JBKNativeTexture;
 
 // constants
 #ifdef _DEBUG
@@ -37,8 +40,12 @@ typedef struct JBKPixelShader JBKPixelShader;
 JBKRenderResult JBKRender_Init(void* hWindow, JBKRenderOptions *options);
 JBKRenderResult JBKRender_Cleanup();
 
-JBKVertexBuffer* JBKRender_CreateVertexBuffer(const void *data, uint32_t sizeInBytes);
+JBKVertexBuffer* JBKRender_CreateVertexBuffer(void* data, uint32_t sizeInBytes);
+JBKVertexBuffer* JBKRender_CreateDynamicVertexBuffer(uint32_t sizeInBytes);
 void JBKRender_DestroyVertexBuffer(JBKVertexBuffer *buffer);
+void* JBKRender_LockVertexBuffer(JBKVertexBuffer *buffer);
+void JBKRender_UnlockVertexBuffer(JBKVertexBuffer *buffer);
+
 JBKConstantBuffer* JBKRender_CreateConstantBuffer(uint32_t sizeInBytes);
 void JBKRender_DestroyConstantBuffer(JBKConstantBuffer *buffer);
 void* JBKRender_LockConstantBuffer(JBKConstantBuffer *buffer);
@@ -48,6 +55,9 @@ JBKVertexShader* JBKRender_CreateVertexShader(void* blob, int32_t sizeInBytes, J
 void JBKRender_DestroyVertexShader(JBKVertexShader* shader);
 JBKPixelShader* JBKRender_CreatePixelShader(void* blob, int32_t sizeInBytes);
 void JBKRender_DestroyPixelShader(JBKPixelShader* shader);
+
+JBKNativeTexture* JBKRender_CreateTexture(uint32_t width, uint32_t height, JBKResourceFormat format, void* data);
+void JBKRender_DestroyTexture(JBKNativeTexture* texture);
 
 JBKRenderResult JBKRender_Clear(JBKRenderColor value, float depthVal, int32_t stencilVal);
 JBKRenderResult JBKRender_ClearRT(JBKRenderColor color);
@@ -62,13 +72,17 @@ JBKRenderResult JBKRender_ClearDef();
 
 JBKRenderResult JBKRender_Present();
 
-JBKRenderResult JBKRender_SetEffect(JBKVertexShader* vertexShader, JBKPixelShader* pixelShader);
-JBKRenderResult JBKRender_SetVertexBuffer(JBKVertexBuffer* vertexBuffer, uint32_t elementCount, uint32_t stride, uint32_t* offsets);
-JBKRenderResult JBKRender_SetVSConstants(JBKConstantBuffer** constantBuffers, uint32_t bufferCount);
-JBKRenderResult JBKRender_SetPSConstants(JBKConstantBuffer** constantBuffers, uint32_t bufferCount);
+JBKRenderResult JBKRender_SetEffect(const JBKVertexShader* vertexShader, const JBKPixelShader* pixelShader);
+JBKRenderResult JBKRender_SetVertexBuffers(JBKVertexBuffer* const* vertexBuffers, uint32_t count, const uint32_t* strides, const uint32_t* offsets);
+JBKRenderResult JBKRender_SetVSConstants(JBKConstantBuffer* const* constantBuffers, uint32_t bufferCount);
+JBKRenderResult JBKRender_SetPSConstants(JBKConstantBuffer* const* constantBuffers, uint32_t bufferCount);
+
+JBKRenderResult JBKRender_SetTextures(JBKNativeTexture* const* textures, uint32_t count);
+JBKRenderResult JBKRender_SetDefaultSampling(uint32_t textureCount);
 
 JBKRenderResult JBKRender_SetBlendAlpha8();
 
 JBKRenderResult JBKRender_DrawPrimitives(JBKPrimitiveType primitiveType, uint32_t vertexCount, uint32_t start);
+JBKRenderResult JBKRender_DrawInstancedPrimitives(JBKPrimitiveType primitiveType, uint32_t vertexCount, uint32_t start, uint32_t instanceCount);
 
 #endif // JBK_RENDER_API_H

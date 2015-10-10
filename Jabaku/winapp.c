@@ -14,18 +14,23 @@
 
 #define ASSERT_SDL(condition) ASSERT(condition, SDL_GetError())
 
-JBKWinAppResult JBKWinApp_Init(JBKWinApp* inst, uint32_t width, uint32_t height, const char* title) {
+JBKWinAppResult JBKWinApp_Init(JBKWinApp* inst, uint32_t width, uint32_t height, const char* title, const JBKWinAppWindowType type) {
 	ASSERT_SDL(SDL_Init(SDL_INIT_EVERYTHING) != -1);
 
 	SDL_Window *win = NULL;
-	win = SDL_CreateWindow(title, 100, 100, width, height, SDL_WINDOW_RESIZABLE);
+	Uint32 flags = 0;
+	switch (type) {
+	case JBK_WINAPP_WINDOWED: flags |= SDL_WINDOW_RESIZABLE; break;
+	case JBK_WINAPP_FULLSCREEN: flags |= SDL_WINDOW_FULLSCREEN; break;
+	}
+	win = SDL_CreateWindow(title, 100, 100, width, height, flags);
 	ASSERT_SDL(win != NULL);
 
 	strcpy_s(inst->mTitle, sizeof(inst->mTitle), title);
 	inst->mWidth = width;
 	inst->mHeight = height;
-	inst->mPosX = 100;
-	inst->mPosY = 100;
+	inst->mPosX = 0;
+	inst->mPosY = 0;
 	inst->mWindow = win;
 	inst->mHandle = GetActiveWindow();
 	inst->mRunning = 1;
@@ -53,6 +58,12 @@ const char* JBKWinApp_GetTitle(JBKWinApp* app) {
 	return app->mTitle;
 }
 
+JBKWinSize JBKWinApp_GetSize(JBKWinApp* inst) {
+	JBKWinSize result = { 0 };
+	SDL_GetWindowSize(inst->mWindow, &result.x, &result.y);
+	return result;
+}
+
 // manipulators
 void JBKWinApp_SetRunning(JBKWinApp* app, int8_t running) {
 	app->mRunning = running;
@@ -62,7 +73,7 @@ void JBKWinApp_SetTitle(JBKWinApp* app, const char* title) {
     strncpy_s(app->mTitle, JBK_WINAPP_TITLESIZE, title, JBK_WINAPP_TITLESIZE);
 }
 
-JBKWinAppResult JBKWinApp_Update(JBKWinApp* app) {
+SDL_Event JBKWinApp_Update(JBKWinApp* app) {
 	SDL_Event e;
 	while (SDL_PollEvent(&e)){
 		switch (e.type) {
@@ -71,5 +82,5 @@ JBKWinAppResult JBKWinApp_Update(JBKWinApp* app) {
 		}
 	}
 
-	return JBK_WINAPP_OK;
+	return e;
 }

@@ -87,9 +87,6 @@
     <ClCompile Include="Assets\texture.c">
       <Filter>Assets</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer\geometry.c">
-      <Filter>Renderer</Filter>
-    </ClCompile>
     <ClCompile Include="math\rectangle.c">
       <Filter>Math</Filter>
     </ClCompile>
@@ -202,12 +199,6 @@
     <ClInclude Include="Assets\texture.h">
       <Filter>Assets</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer\nativetexture.h">
-      <Filter>Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer\geometry.h">
-      <Filter>Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="math\rectangle.h">
       <Filter>Math</Filter>
     </ClInclude>
@@ -264,6 +255,9 @@
     </ClInclude>
     <ClInclude Include="math\matrix_test.h">
       <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\resource_format.h">
+      <Filter>Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

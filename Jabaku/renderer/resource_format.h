@@ -1,0 +1,9 @@
+#ifndef JBK_RESOURCE_FORMAT
+#define JBK_RESOURCE_FORMAT
+
+typedef enum {
+	JBK_RESOURCE_R8G8B8A8
+} JBKResourceFormat;
+
+
+#endif // JBK_RESOURCE_FORMAT

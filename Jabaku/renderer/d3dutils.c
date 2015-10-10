@@ -2,11 +2,21 @@
 
 DXGI_FORMAT JBKD3DUtils_ConvertFormat(JBKShaderFormat format) {
 	switch (format) {
-	case JBK_FMT_X: return DXGI_FORMAT_R32_FLOAT;
-	case JBK_FMT_XY: return DXGI_FORMAT_R32G32_FLOAT;
-	case JBK_FMT_XYZ: return DXGI_FORMAT_R32G32B32_FLOAT;
-	case JBK_FMT_XYZW: return DXGI_FORMAT_R32G32B32A32_FLOAT;
-	case JBK_FMT_COLOR: return DXGI_FORMAT_R8G8B8A8_UNORM;
+	case JBK_FMT_X:
+	case JBK_FMT_X_INST:
+		return DXGI_FORMAT_R32_FLOAT;
+	case JBK_FMT_XY:
+	case JBK_FMT_XY_INST:
+		return DXGI_FORMAT_R32G32_FLOAT;
+	case JBK_FMT_XYZ:
+	case JBK_FMT_XYZ_INST:
+		return DXGI_FORMAT_R32G32B32_FLOAT;
+	case JBK_FMT_XYZW:
+	case JBK_FMT_XYZW_INST:
+		return DXGI_FORMAT_R32G32B32A32_FLOAT;
+	case JBK_FMT_COLOR:
+	case JBK_FMT_COLOR_INST:
+		return DXGI_FORMAT_R8G8B8A8_UNORM;
 	}
 	return DXGI_FORMAT_UNKNOWN;
 }
@@ -20,4 +30,20 @@ D3D11_PRIMITIVE_TOPOLOGY JBKD3DUtils_ConvertPritmitiveType(JBKPrimitiveType prim
 	case JBK_PRIMITIVE_TRIANGLE_STRIP: return D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
 	}
 	return D3D_PRIMITIVE_TOPOLOGY_UNDEFINED;
+}
+
+DXGI_FORMAT JBKD3DUtils_ConvertResourceFormat(JBKResourceFormat format) {
+	switch (format) {
+	case JBK_RESOURCE_R8G8B8A8: return DXGI_FORMAT_R8G8B8A8_UNORM;
+	}
+
+	return DXGI_FORMAT_UNKNOWN;
+}
+
+uint32_t JBKD3DUtils_GetFormatSize(JBKResourceFormat format) {
+	switch (format) {
+	case JBK_RESOURCE_R8G8B8A8: return 4;
+	}
+
+	return 0;
 }
